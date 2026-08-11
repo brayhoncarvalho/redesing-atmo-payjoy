@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/dock-tech/shared-copilot-front-lib/blob/main/copilot-config/schemas/dock-ds-config.schema.json",
+  "title": "dock-ds.config.json",
+  "description": "Configuração de governance do Design System por projeto — define allowlists de cores, fontes, componentes preferidos e exceções formais com expiresAt + ticket.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": ["name"],
+
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Path para o schema JSON. Habilita autocomplete no editor."
+    },
+
+    "name": {
+      "type": "string",
+      "description": "Nome do projeto (igual ao package.json name).",
+      "minLength": 1
+    },
+
+    "description": {
+      "type": "string",
+      "description": "Descrição opcional do projeto."
+    },
+
+    "tokens": {
+      "type": "object",
+      "description": "Allowlist de design tokens permitidos.",
+      "additionalProperties": false,
+      "properties": {
+        "colors": {
+          "type": "array",
+          "description": "Lista de hex colors permitidos (sem #). Vazio = só permite tokens var(--*).",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$",
+            "description": "Hex color de 6 ou 8 caracteres (sem #)."
+          }
+        },
+        "fonts": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "allowed": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Fontes permitidas (ex: Inter, Roboto)."
+            },
+            "banned": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Fontes proibidas (ex: Comic Sans, Times)."
+            }
+          }
+        }
+      }
+    },
+
+    "components": {
+      "type": "object",
+      "description": "Componentes do Design System que devem ser preferidos sobre HTML nativo.",
+      "additionalProperties": false,
+      "properties": {
+        "preferImport": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^Ds[A-Z][a-zA-Z]+$",
+            "description": "Nome do componente Ds* (ex: DsButton, DsInput)."
+          },
+          "description": "Lista de componentes Ds* preferidos. ESLint vai sugerir esses quando vir HTML nativo equivalente."
+        }
+      }
+    },
+
+    "exceptions": {
+      "type": "array",
+      "description": "Exceções formais às regras de governance. TODA exceção exige expiresAt e ticket.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rule", "reason", "expiresAt", "ticket"],
+        "properties": {
+          "rule": {
+            "type": "string",
+            "description": "Nome da regra ESLint (ex: dock-ds/no-unauthorized-colors).",
+            "pattern": "^[a-z][a-z0-9-]*\\/[a-z][a-z0-9-]*$"
+          },
+          "files": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Glob patterns dos arquivos afetados."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Justificativa técnica clara (não 'preguiça' ou 'depois').",
+            "minLength": 20
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date",
+            "description": "Data ISO (YYYY-MM-DD) em que a exceção expira. Após essa data, CI bloqueia o build.",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "ticket": {
+            "type": "string",
+            "description": "Ticket de tracking (Jira, Linear, GitHub Issue) para resolver a exceção.",
+            "pattern": "^(JIRA-\\d+|LINEAR-\\w+|#\\d+|GH-\\d+)$"
+          },
+          "approvedBy": {
+            "type": "string",
+            "description": "Quem aprovou a exceção (usuário GitHub ou email)."
+          }
+        }
+      }
+    }
+  }
+}

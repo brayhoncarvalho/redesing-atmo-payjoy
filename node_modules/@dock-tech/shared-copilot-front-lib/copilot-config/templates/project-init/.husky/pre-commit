@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+# Pre-commit gate do Design System (instalado por @dock-tech/shared-copilot-front-lib).
+# Roda o enforcement determinístico nos arquivos staged — antes do commit,
+# não depois. É o ponto onde "o sistema corrige o dev" acontece de forma
+# automática e local, sem depender de ninguém invocar nada.
+npx lint-staged

@@ -1,0 +1,180 @@
+/* ── Google Fonts (Exo 2 + Open Sans) — deve vir antes de qualquer regra ── */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600;700&display=swap');
+
+@import "tailwindcss";
+
+/* ── Fontes Telefonica (custom) ── */
+@font-face {
+  font-family: 'Telefonica';
+  src: url('/fonts/telefonica/Telefonica-Light.otf') format('opentype');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Telefonica';
+  src: url('/fonts/telefonica/Telefonica-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Telefonica';
+  src: url('/fonts/telefonica/Telefonica-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* ── Tokens de cor (paleta ATMO/Movistar) ── */
+:root {
+  /* Primitivos — Movistar Blue */
+  --color-brand-50:  #e0f3fe;
+  --color-brand-100: #b3e1fc;
+  --color-brand-200: #80cef9;
+  --color-brand-300: #4dbaf7;
+  --color-brand-400: #1aa7f5;
+  --color-brand-500: #019df4;
+  --color-brand-600: #0186da;
+  --color-brand-700: #016dbd;
+  --color-brand-800: #01549f;
+  --color-brand-900: #013b82;
+
+  /* Sidebar Movistar */
+  --color-sidebar-bg:     #ffffff;
+  --color-sidebar-active: #0294d2;
+  --color-sidebar-text:   #ffffff;
+
+  /* Ação (verde PayJoy / ATMO) */
+  --color-action-50:  #f0fce8;
+  --color-action-500: #5bc41a;
+  --color-action-600: #5ba000;
+
+  /* Grays (Bootstrap scale) */
+  --color-gray-50:  #f8f9fa;
+  --color-gray-100: #f6f6f6;
+  --color-gray-200: #e9ecef;
+  --color-gray-300: #dee2e6;
+  --color-gray-400: #ced4da;
+  --color-gray-500: #adb5bd;
+  --color-gray-600: #6c757d;
+  --color-gray-700: #495057;
+  --color-gray-800: #343a40;
+  --color-gray-900: #212529;
+
+  /* Feedback */
+  --color-danger:  #dc2626;
+  --color-success: #16a34a;
+  --color-warning: #ffc107;
+
+  /* Semânticos */
+  --color-brand:        var(--color-brand-500);
+  --color-brand-hover:  var(--color-brand-700);
+  --color-brand-light:  var(--color-brand-50);
+  --color-brand-border: var(--color-brand-400);
+
+  --color-bg-app:     var(--color-gray-100);
+  --color-bg-sidebar: var(--color-sidebar-bg);
+  --color-bg-card:    #ffffff;
+  --color-border:     var(--color-gray-300);
+
+  --color-text-primary:   var(--color-gray-900);
+  --color-text-secondary: var(--color-gray-600);
+  --color-text-label:     var(--color-gray-700);
+
+  /* Tipografia */
+  --font-body:     'Telefonica', 'Open Sans', ui-sans-serif, sans-serif;
+  --font-heading:  'Exo 2', 'Telefonica', sans-serif;
+
+  /* Espaçamento */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Sombra */
+  --shadow-sm:   0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --shadow-card: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+
+  /* Transição padrão */
+  --transition-base: all 0.2s ease-in-out;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-app);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* ── Botões globais ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.btn--sm { height: 32px; padding: 0 14px; font-size: 13px; }
+
+.btn--primary {
+  background: var(--color-brand-500);
+  color: #fff;
+}
+.btn--primary:hover:not(:disabled) { background: var(--color-brand-700); }
+.btn--primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(1, 157, 244, 0.35);
+}
+.btn--primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+.btn--ghost:hover:not(:disabled) { background: var(--color-gray-50); }
+.btn--ghost:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(1, 157, 244, 0.25);
+}
+.btn--ghost:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border-width: 0;
+}
+
+/* ── Step transitions (global — classes applied to child component root) ── */
+.step-fade-enter-active,
+.step-fade-leave-active {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.step-fade-enter-from {
+  opacity: 0;
+  transform: translateX(12px);
+}
+
+.step-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-12px);
+}
+

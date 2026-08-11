@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/@dock-tech/shared-copilot-front-lib/schemas/dock-ds-config.schema.json",
+  "name": "my-project",
+  "description": "Configuração de governance do Design System neste projeto. Define allowlists de cores/fontes, componentes preferidos e exceções formais.",
+
+  "tokens": {
+    "colors": ["#1cc0c0", "#00d8d8", "#242424", "#ffffff", "#f5f5f5", "#dc3545", "#198754", "#ffc107"],
+    "fonts": {
+      "allowed": ["Inter", "Roboto"],
+      "banned": ["Poppins", "Comic Sans", "Arial", "Helvetica", "Times New Roman", "Open Sans"]
+    }
+  },
+
+  "components": {
+    "preferImport": [
+      "DsButton",
+      "DsInput",
+      "DsSelect",
+      "DsTextarea",
+      "DsTable",
+      "DsForm",
+      "DsCard",
+      "DsModal",
+      "DsAlert",
+      "DsBadge",
+      "DsCheckbox",
+      "DsRadioGroup",
+      "DsSwitch"
+    ]
+  },
+
+  "exceptions": []
+}

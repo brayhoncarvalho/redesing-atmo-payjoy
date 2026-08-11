@@ -1,0 +1,149 @@
+{
+  "common": {
+    "search": "Buscar",
+    "clear": "Limpiar Filtro",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "back": "Volver",
+    "loading": "Buscando...",
+    "export": "Exportar",
+    "yes": "Sí",
+    "no": "No",
+    "actions": "Acciones"
+  },
+  "historial": {
+    "title": "Historial de pagos",
+    "subtitle": "Consulta y gestión del historial de transacciones",
+    "filtersTitle": "Filtros de búsqueda",
+    "resultsTitle": "Resultados",
+    "resultsFound": "{count} resultado encontrado",
+    "resultsFoundPlural": "{count} resultados encontrados",
+    "invalidDateRange": "La fecha de inicio no puede ser mayor a la fecha de fin",
+    "errorTitle": "Error al cargar",
+    "retry": "Reintentar",
+    "noResultsTitle": "Sin resultados",
+    "noResultsDescription": "No se encontraron pagos con los filtros aplicados.",
+    "exportAll": "Exportar todo ({count})",
+    "exportSelected": "Exportar seleccionados ({count})",
+    "exportAllSuccess": "Exportación completada",
+    "exportSelectedSuccess": "Exportación de seleccionados completada",
+    "noSelectedWarning": "Seleccione al menos un registro para exportar",
+    "copyIdSuccess": "ID copiado al portapapeles",
+    "searchLoading": "Buscando...",
+    "cancelPayment": "Cancelar pago",
+    "cancelPaymentAlreadyDone": "Este pago ya está cancelado",
+    "cancelPaymentSuccess": "Pago cancelado exitosamente",
+    "integrationAction": "Integraciones de",
+    "detailModalTitle": "Detalle del pago",
+    "detailModalClose": "Cerrar detalle",
+    "detailSectionTitle": "Datos del dispositivo",
+    "detailPayjoySection": "PayJoy",
+    "detailCatalinaSection": "Catalina",
+    "summaryStoreIdLabel": "ID PDV",
+    "summaryDateHour": "Fecha / Hora",
+    "summaryPaymentType": "Tipo de pago",
+    "summaryPaymentMethod": "Forma de pago",
+    "summaryTotal": "Total",
+    "detailIdTransaccion": "ID Transacción",
+    "detailNumeroAutorizacion": "Número de autorización",
+    "detailFechaPago": "Fecha de pago",
+    "detailFechaCreacion": "Fecha de creación",
+    "detailMonto": "Monto",
+    "detailServicio": "Servicio",
+    "detailProducto": "Producto",
+    "detailEstado": "Estado",
+    "detailPasoFlujo": "Paso en flujo",
+    "detailUsuario": "Usuario",
+    "detailIdDelPago": "ID del pago",
+    "detailTienda": "Tienda",
+    "detailFechaEnvio": "Fecha de envío",
+    "detailEstadoCatalina": "Estado Catalina",
+    "detailInfoAdicional": "Información adicional"
+  },
+  "filters": {
+    "fechaInicio": "Fecha inicio",
+    "fechaFin": "Fecha fin",
+    "estado": "Estado",
+    "selectEstado": "Seleccione el estado",
+    "numeroAutorizacion": "Número de autorización",
+    "numeroAutorizacionPlaceholder": "Ingrese el número",
+    "pasoFlujo": "Paso en flujo",
+    "selectPasoFlujo": "Seleccione el paso en flujo",
+    "tienda": "Tienda",
+    "tiendaPlaceholder": "Ingrese la tienda",
+    "usuario": "Usuario",
+    "usuarioPlaceholder": "Ingrese el usuario",
+    "moreFilters": "Más Filtros",
+    "lessFilters": "Menos Filtros",
+    "search": "Buscar",
+    "clear": "Limpiar Filtro",
+    "searchPlaceholder": "Buscar...",
+    "selectAll": "Seleccionar todo",
+    "selected": "{count} seleccionados"
+  },
+  "table": {
+    "columns": {
+      "numeroAutorizacion": "Número de autorización",
+      "idTransaccion": "ID transacción",
+      "idRed": "ID red",
+      "fechaCreacion": "Fecha de creación",
+      "monto": "Monto",
+      "servicio": "Servicio",
+      "estado": "Estado",
+      "pasoFlujo": "Paso en flujo",
+      "detalles": "Detalles",
+      "integraciones": "Integraciones"
+    },
+    "selectAll": "Seleccionar todos los resultados",
+    "selectRow": "Seleccionar transaccion {id}"
+  },
+  "pagos": {
+    "title": "Pagos PayJoy",
+    "subtitle": "Registra y gestiona los pagos de dispositivos",
+    "step1": {
+      "title": "Forma de pago",
+      "subtitle": "Seleccione el tipo de pago a realizar"
+    },
+    "step2": {
+      "title": "Registrar pago",
+      "subtitle": "Complete los datos del pago"
+    },
+    "step3": {
+      "title": "Confirmar",
+      "subtitle": "Revise y confirme los datos antes de procesar"
+    },
+    "form": {
+      "nombre": "Nombre",
+      "apellido": "Apellido",
+      "imei": "IMEI",
+      "monto": "Monto",
+      "tienda": "Tienda",
+      "required": "Este campo es obligatorio",
+      "invalidImei": "IMEI inválido (15 dígitos)",
+      "invalidMonto": "Monto inválido"
+    },
+    "estados": {
+      "cancelado": "Cancelado",
+      "concluido": "Concluido",
+      "en-progreso": "En Progreso",
+      "expirado": "Expirado",
+      "rechazado": "Rechazado",
+      "registrando": "Registrando"
+    }
+  },
+  "integrations": {
+    "title": "Integraciones",
+    "ruta": "Ruta",
+    "fecha": "Fecha",
+    "fechaResponse": "Fecha Response",
+    "solicitud": "Solicitud",
+    "respuesta": "Respuesta"
+  },
+  "nav": {
+    "historialPagos": "Historial de pagos",
+    "historialPagosV2": "Historial de pagos V2",
+    "pagoPayjoy": "Pago PayJoy",
+    "pagoPayjoyV2": "Pago PayJoy V2"
+  }
+}

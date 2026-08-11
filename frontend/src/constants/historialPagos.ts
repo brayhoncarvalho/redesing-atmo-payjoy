@@ -1,0 +1,411 @@
+export interface CatalinaInfo {
+  fechaEnvio: string
+  estado: string
+  informacionAdicional: string
+}
+
+export interface HistorialPagoRecord {
+  id: string
+  numeroAutorizacion: string
+  voucher: string
+  deviceTag: string
+  imei: string
+  dn: string
+  idTransaccion: string
+  idRed: string
+  fechaCreacion: string
+  fechaPago: string
+  monto: string
+  servicio: string
+  estado: string
+  pasoFlujo: string
+  canal: string
+  tienda: string
+  usuario: string
+  producto: string
+  idDelPago: string
+  tipoPago: string
+  formaPago: string
+  referencia: string
+  total: number
+  storeName: string
+  storePdvId: string
+  catalina?: CatalinaInfo
+}
+
+export interface HistorialPagosFilters {
+  fechaInicio: string
+  fechaFin: string
+  canal: string
+  estados: string[]
+  pasosFlujo: string[]
+  numeroAutorizacion: string
+  tienda: string
+  usuario: string
+  buscarPorValor: string
+  buscarPorCampo: '' | 'numeroAutorizacion' | 'voucher' | 'deviceTag' | 'imei' | 'dn'
+}
+
+export const HISTORIAL_PAGOS_TEXT = {
+  title: 'Historial de pagos',
+  subtitle: 'Consultá y exportá los pagos registrados.',
+  filtersTitle: 'Filtros',
+  moreFilters: '+ Más filtros',
+  lessFilters: '− Menos filtros',
+  clearFilters: 'Limpiar filtro',
+  search: 'Buscar',
+  searchLoading: 'Buscando...',
+  resultsTitle: 'Resultados',
+  resultsFound: 'Se encontraron {count} resultado',
+  resultsFoundPlural: 'Se encontraron {count} resultados',
+  exportAll: 'Exportar todo ({count})',
+  exportSelected: 'Exportar seleccionados ({count})',
+  noResultsTitle: 'No encontramos pagos con esos filtros',
+  noResultsDescription: 'Probá ajustar los filtros o limpiar la búsqueda para volver a consultar.',
+  retry: 'Reintentar',
+  errorTitle: 'No se pudo completar la búsqueda',
+  invalidDateRange: 'La fecha inicio no puede ser mayor que la fecha fin.',
+  searchFieldRequired: 'Si ingresás un valor, primero seleccioná el tipo de búsqueda.',
+  detailModalTitle: 'Detalles del pago',
+  detailModalClose: 'Cerrar detalles del pago',
+  detailPayjoySection: 'PAYJOY',
+  detailCatalinaSection: 'CATALINA',
+  detailIdTransaccion: 'ID TRANSACCIÓN',
+  detailNumeroAutorizacion: 'NÚMERO DE AUTORIZACIÓN',
+  detailFechaPago: 'FECHA DE PAGO',
+  detailFechaCreacion: 'FECHA DE CREACIÓN',
+  detailMonto: 'MONTO',
+  detailServicio: 'SERVICIO',
+  detailProducto: 'PRODUCTO',
+  detailEstado: 'ESTADO',
+  detailPasoFlujo: 'PASO EN FLUJO',
+  detailUsuario: 'USUARIO',
+  detailIdDelPago: 'ID DEL PAGO',
+  detailTienda: 'TIENDA',
+  detailFechaEnvio: 'FECHA DE ENVÍO',
+  detailEstadoCatalina: 'ESTADO',
+  detailInfoAdicional: 'INFORMACIÓN ADICIONAL',
+  copyIdSuccess: 'ID del pago copiado.',
+  cancelPayment: 'Cancelar Pago',
+  cancelPaymentSuccess: 'Pago cancelado correctamente.',
+  cancelPaymentAlreadyDone: 'Este pago ya se encuentra cancelado.',
+  summaryStoreIdLabel: 'ID PDV',
+  summaryDateHour: 'Fecha / Hora',
+  summaryPaymentType: 'Tipo de Pago',
+  summaryPaymentMethod: 'Forma de pago',
+  summaryDeviceTag: 'DeviceTag',
+  summaryImei: 'IMEI',
+  summaryReference: 'Referencia',
+  summaryTotal: 'TOTAL',
+  detailSectionTitle: 'DETALLES DEL PAGO',
+  integrationAction: 'Integraciones abiertas',
+  exportAllSuccess: 'Exportación total descargada correctamente.',
+  exportSelectedSuccess: 'Exportación de seleccionados descargada correctamente.',
+  noSelectedWarning: 'Seleccioná al menos un registro para exportar.',
+} as const
+
+export const CANAL_OPTIONS = [
+  { value: '', label: 'Seleccione el canal' },
+  { value: 'multipagos', label: 'Multipagos' },
+  { value: 'payjoy-iniciales', label: 'PayJoy Iniciales' },
+  { value: 'payjoy-semanales', label: 'PayJoy Semanales' },
+] as const
+
+export const ESTADO_OPTIONS = [
+  { value: 'cancelado',    label: 'Cancelado' },
+  { value: 'concluido',    label: 'Concluido' },
+  { value: 'en-progreso',  label: 'En Progreso' },
+  { value: 'expirado',     label: 'Expirado' },
+  { value: 'rechazado',    label: 'Rechazado' },
+  { value: 'registrando',  label: 'Registrando' },
+] as const
+
+export const BUSCAR_POR_OPTIONS = [
+  { value: '', label: 'Seleccione' },
+  { value: 'numeroAutorizacion', label: 'Número de autorización' },
+  { value: 'voucher', label: 'Voucher' },
+  { value: 'deviceTag', label: 'DeviceTag' },
+  { value: 'imei', label: 'IMEI' },
+  { value: 'dn', label: 'DN' },
+] as const
+
+export const PASO_FLUJO_OPTIONS = [
+  { value: 'concluido',         label: 'Concluído' },
+  { value: 'confirmacion',      label: 'Confirmación' },
+  { value: 'error-catalina',    label: 'Error Catalina' },
+  { value: 'gesto-pago',        label: 'Gesto Pago' },
+  { value: 'liga-generada',     label: 'Liga Generada' },
+  { value: 'pendiente-catalina',label: 'Pendiente Catalina' },
+] as const
+
+export const TIENDAS_OPTIONS = [
+  { value: '21010002', label: '21010002 - CAC GALERIAS DEL VALLE' },
+  { value: '21010006', label: '21010006 - CAC PASEO TIJUANA 2000' },
+  { value: '21010007', label: '21010007 - CAC LA PAZ' },
+  { value: '21010009', label: '21010009 - CAC ENSENADA' },
+  { value: '21010010', label: '21010010 - CAC KINO SAN LUIS' },
+  { value: '21010011', label: '21010011 - CAC CABO SAN LUCAS' },
+  { value: '21050015', label: '21050015 - CAC TAPACHULA' },
+  { value: '21050020', label: '21050020 - CAC HUIXTLA' },
+  { value: '99030005', label: '99030005 - CAC TORREON' },
+] as const
+
+export const HISTORIAL_PAGOS_COLUMNS = [
+  'Número de autorización',
+  'ID transacción',
+  'ID red',
+  'Fecha de creación',
+  'Monto',
+  'Servicio',
+  'Estado',
+  'Paso en flujo',
+  'Detalles',
+  'Integraciones',
+] as const
+
+export const INITIAL_FILTERS: HistorialPagosFilters = {
+  fechaInicio: '2026-08-01',
+  fechaFin: '2026-08-11',
+  canal: '',
+  estados: [],
+  pasosFlujo: [],
+  numeroAutorizacion: '',
+  tienda: '',
+  usuario: '',
+  buscarPorValor: '',
+  buscarPorCampo: '',
+}
+
+export const MOCK_HISTORIAL_PAGOS: HistorialPagoRecord[] = [
+  {
+    id: 'row-1',
+    numeroAutorizacion: '533235',
+    voucher: '837291',
+    deviceTag: 'DTCSXTS',
+    imei: '356938035643809',
+    dn: 'DN-445566',
+    idTransaccion: '879629057',
+    idRed: 'AXC30318',
+    fechaCreacion: '2026-08-11 08:14',
+    fechaPago: '2026-08-11 08:14',
+    monto: '$50.00',
+    servicio: 'Telcel',
+    estado: 'concluido',
+    pasoFlujo: 'Concluído',
+    canal: 'multipagos',
+    tienda: 'CAC GALERIAS DEL VALLE',
+    usuario: 'camila.graciano',
+    producto: 'Recarga $50',
+    idDelPago: 'pay_1_49473134',
+    tipoPago: 'Pago Total',
+    formaPago: 'Efectivo',
+    referencia: 'REF20260811001',
+    total: 50,
+    storeName: 'CAC GALERIAS DEL VALLE',
+    storePdvId: '21010002',
+    catalina: {
+      fechaEnvio: '2026-08-11 08:15',
+      estado: 'Concluido',
+      informacionAdicional: 'Transacción procesada correctamente.',
+    },
+  },
+  {
+    id: 'row-2',
+    numeroAutorizacion: '541087',
+    voucher: '418052',
+    deviceTag: 'DTKQMLP',
+    imei: '351938047781204',
+    dn: 'DN-112233',
+    idTransaccion: '880014722',
+    idRed: 'AXC30319',
+    fechaCreacion: '2026-08-11 09:32',
+    fechaPago: '2026-08-11 09:32',
+    monto: '$1,499.00',
+    servicio: 'Movistar',
+    estado: 'concluido',
+    pasoFlujo: 'Concluído',
+    canal: 'multipagos',
+    tienda: 'CAC GALERIAS DEL VALLE',
+    usuario: 'camila.graciano',
+    producto: 'Equipo Samsung A15',
+    idDelPago: 'pay_1_49481220',
+    tipoPago: 'Pago Total',
+    formaPago: 'Tarjeta',
+    referencia: 'REF20260811002',
+    total: 1499,
+    storeName: 'CAC GALERIAS DEL VALLE',
+    storePdvId: '21010002',
+  },
+  {
+    id: 'row-3',
+    numeroAutorizacion: '542900',
+    voucher: '902644',
+    deviceTag: 'DTRWZBN',
+    imei: '358213099114507',
+    dn: 'DN-778899',
+    idTransaccion: '880201345',
+    idRed: 'AXC30320',
+    fechaCreacion: '2026-08-11 10:55',
+    fechaPago: '2026-08-11 10:55',
+    monto: '$249.00',
+    servicio: 'AT&T',
+    estado: 'rechazado',
+    pasoFlujo: 'Error Catalina',
+    canal: 'multipagos',
+    tienda: 'CAC PERISUR',
+    usuario: 'luis.mendez',
+    producto: 'Recarga $249',
+    idDelPago: 'pay_1_49490011',
+    tipoPago: 'Pago Parcial',
+    formaPago: 'Efectivo',
+    referencia: 'REF20260811003',
+    total: 249,
+    storeName: 'CAC PERISUR',
+    storePdvId: '21010009',
+    catalina: {
+      fechaEnvio: '2026-08-11 10:56',
+      estado: 'Rechazado',
+      informacionAdicional: 'Timeout en la conexión con Catalina.',
+    },
+  },
+  {
+    id: 'row-4',
+    numeroAutorizacion: '543512',
+    voucher: '563117',
+    deviceTag: 'DTPLNVA',
+    imei: '354772011903668',
+    dn: 'DN-334455',
+    idTransaccion: '880389102',
+    idRed: 'AXC30321',
+    fechaCreacion: '2026-08-11 11:40',
+    fechaPago: '',
+    monto: '$498.00',
+    servicio: 'Telcel',
+    estado: 'en-progreso',
+    pasoFlujo: 'Gesto Pago',
+    canal: 'multipagos',
+    tienda: 'CAC PERISUR',
+    usuario: 'luis.mendez',
+    producto: 'Recarga $498',
+    idDelPago: 'pay_1_49502233',
+    tipoPago: 'Pago Total',
+    formaPago: 'Tarjeta',
+    referencia: 'REF20260811004',
+    total: 498,
+    storeName: 'CAC PERISUR',
+    storePdvId: '21010009',
+  },
+  {
+    id: 'row-5',
+    numeroAutorizacion: '544001',
+    voucher: '230985',
+    deviceTag: 'DTHGSKQ',
+    imei: '359001478223190',
+    dn: 'DN-556677',
+    idTransaccion: '880477891',
+    idRed: 'AXC30322',
+    fechaCreacion: '2026-08-11 13:15',
+    fechaPago: '',
+    monto: '$3,742.50',
+    servicio: 'Movistar',
+    estado: 'registrando',
+    pasoFlujo: 'Liga Generada',
+    canal: 'multipagos',
+    tienda: 'CAC TORREON',
+    usuario: 'ana.ruiz',
+    producto: 'Equipo iPhone 14',
+    idDelPago: 'pay_1_49511445',
+    tipoPago: 'Pago Total',
+    formaPago: 'Efectivo',
+    referencia: 'REF20260811005',
+    total: 3742.50,
+    storeName: 'CAC TORREON',
+    storePdvId: '99030005',
+  },
+  {
+    id: 'row-6',
+    numeroAutorizacion: '520188',
+    voucher: '774310',
+    deviceTag: 'DTMWQXR',
+    imei: '352998001547720',
+    dn: 'DN-889900',
+    idTransaccion: '879001234',
+    idRed: 'AXC30290',
+    fechaCreacion: '2026-08-10 08:22',
+    fechaPago: '2026-08-10 08:23',
+    monto: '$1,499.00',
+    servicio: 'Telcel',
+    estado: 'concluido',
+    pasoFlujo: 'Concluído',
+    canal: 'multipagos',
+    tienda: 'CAC GALERIAS DEL VALLE',
+    usuario: 'ana.ruiz',
+    producto: 'Equipo Moto G84',
+    idDelPago: 'pay_1_49398801',
+    tipoPago: 'Pago Total',
+    formaPago: 'Tarjeta',
+    referencia: 'REF20260810001',
+    total: 1499,
+    storeName: 'CAC GALERIAS DEL VALLE',
+    storePdvId: '21010002',
+  },
+  {
+    id: 'row-7',
+    numeroAutorizacion: '520477',
+    voucher: '119476',
+    deviceTag: 'DTZCVBM',
+    imei: '353110229948871',
+    dn: 'DN-001122',
+    idTransaccion: '879112099',
+    idRed: 'AXC30291',
+    fechaCreacion: '2026-08-10 10:07',
+    fechaPago: '',
+    monto: '$249.00',
+    servicio: 'AT&T',
+    estado: 'expirado',
+    pasoFlujo: 'Pendiente Catalina',
+    canal: 'multipagos',
+    tienda: 'CAC TAPACHULA',
+    usuario: 'camila.graciano',
+    producto: 'Recarga $249',
+    idDelPago: 'pay_1_49410077',
+    tipoPago: 'Pago Parcial',
+    formaPago: 'Efectivo',
+    referencia: 'REF20260810002',
+    total: 249,
+    storeName: 'CAC TAPACHULA',
+    storePdvId: '21050015',
+    catalina: {
+      fechaEnvio: '2026-08-10 10:08',
+      estado: 'Pendiente',
+      informacionAdicional: 'Respuesta no recibida dentro del tiempo límite.',
+    },
+  },
+  {
+    id: 'row-8',
+    numeroAutorizacion: '521390',
+    voucher: '651042',
+    deviceTag: 'DTXHNPQ',
+    imei: '357441098234561',
+    dn: 'DN-223344',
+    idTransaccion: '879300567',
+    idRed: 'AXC30292',
+    fechaCreacion: '2026-08-10 14:50',
+    fechaPago: '2026-08-10 14:51',
+    monto: '$998.00',
+    servicio: 'Movistar',
+    estado: 'cancelado',
+    pasoFlujo: 'Confirmación',
+    canal: 'multipagos',
+    tienda: 'CAC PERISUR',
+    usuario: 'luis.mendez',
+    producto: 'Equipo Redmi 13C',
+    idDelPago: 'pay_1_49425566',
+    tipoPago: 'Pago Total',
+    formaPago: 'Tarjeta',
+    referencia: 'REF20260810003',
+    total: 998,
+    storeName: 'CAC PERISUR',
+    storePdvId: '21010009',
+  },
+]

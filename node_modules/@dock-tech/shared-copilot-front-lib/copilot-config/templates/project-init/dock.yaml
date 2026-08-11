@@ -1,0 +1,45 @@
+# dock.yaml — Contrato de configuração para Everlast Pipeline
+# Gerado por: npx @dock-tech/shared-copilot-front-lib init
+#
+# Ref: https://docktech.atlassian.net/wiki/spaces/APE/pages/3662938159/Template+dock.yaml
+# Fluxo: Jenkins (Everlast Build) → CI (lint, test, validate:design, build)
+#         Argo (Everlast Deploy) → CD (deploy conforme deploymentType)
+#
+# Branches Gitflow: master, release/*, develop, feature/*, hotfix/*
+# ⚠️ Preencha os campos marcados com ${} antes de commitar.
+
+name: ${PROJECT_NAME}
+squad: ${SQUAD_NAME}
+tribe: ${TRIBE_NAME}
+tower: ${TOWER_NAME}
+version: "0.1.0"
+language: node
+buildType: npm
+languageVersion: "18"
+cloudProvider: "AWS"
+deploymentType: "FrontendAwsCloudFront"
+deploymentStrategy: "rolling"
+channel: "#${SLACK_CHANNEL}"
+
+appSrcFolder: "src/"
+appTestFolder: "src/utils/__tests__"
+
+package:
+  type: "s3"
+
+frontEndPathStatics: "dist/"
+
+envs:
+  dev:
+    autoApproveDeploy: true
+    accountName: ""
+    accountId: ""
+  hml:
+    autoApproveDeploy: false
+    accountName: ""
+    accountId: ""
+  prd:
+    autoApproveDeploy: false
+    accountName: ""
+    accountId: ""
+    region: "sa-east-1"

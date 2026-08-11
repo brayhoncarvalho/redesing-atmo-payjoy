@@ -1,0 +1,16 @@
+{
+  "devDependencies": {
+    "@dock-tech/shared-copilot-front-lib": "^1.0.11"
+  },
+  "scripts": {
+    "validate:design": "node node_modules/@dock-tech/shared-copilot-front-lib/copilot-config/scripts/validate-design.mjs",
+    "validate:contrast": "node node_modules/@dock-tech/shared-copilot-front-lib/copilot-config/scripts/validate-contrast.mjs",
+    "validate:states": "node node_modules/@dock-tech/shared-copilot-front-lib/copilot-config/scripts/check-component-states.mjs",
+    "validate": "node node_modules/@dock-tech/shared-copilot-front-lib/copilot-config/scripts/validate-pipeline.mjs",
+    "validate:figma": "node node_modules/@dock-tech/shared-copilot-front-lib/copilot-config/scripts/figma-fidelity-audit.mjs",
+    "validate:config": "node node_modules/@dock-tech/shared-copilot-front-lib/copilot-config/scripts/validate-config.mjs",
+    "compliance": "node node_modules/@dock-tech/shared-copilot-front-lib/copilot-config/scripts/compliance-report.mjs",
+    "lint:dock-ds": "ESLINT_USE_FLAT_CONFIG=true eslint .",
+    "lint:dock-ds:fix": "ESLINT_USE_FLAT_CONFIG=true eslint . --fix"
+  }
+}

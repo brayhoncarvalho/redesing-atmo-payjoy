@@ -1,0 +1,58 @@
+# Frontend Quality Gate — enforcement determinístico do Design System.
+# Instalado por @dock-tech/shared-copilot-front-lib. Roda em PRs que tocam UI.
+#
+# Este é o gate AUTOMÁTICO (não depende de ninguém invocar). Cobre o que é
+# verificável por máquina: tokens, cor, contraste, fonte, uso de Ds*, a11y de
+# label. A auditoria UX profunda (ux-guardian) é um passo OPCIONAL no fim —
+# requer um runner de LLM com ANTHROPIC_API_KEY e fica desligada por padrão.
+name: Frontend Quality Gate
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - '**/*.config.*'
+      - 'dock-ds.config.json'
+      - 'tokens.css'
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+
+      - name: ESLint — regras do Design System (cor, fonte, spacing, Ds*, a11y, harmonia)
+        run: npm run lint:dock-ds
+
+      - name: Validar tokens do Design System
+        run: npm run validate:design
+
+      - name: Validar contraste WCAG — tema claro
+        run: npm run validate:contrast -- --theme light
+
+      - name: Validar contraste WCAG — tema escuro
+        run: npm run validate:contrast -- --theme dark
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # OPCIONAL — Auditoria UX por IA (ux-guardian / a11y-auditor).
+  # A auditoria profunda de UX é julgamento, não regra determinística: precisa
+  # de um modelo. Ligue este job quando houver runner de LLM + secret.
+  # Sem isso, a auditoria continua sendo invocada manualmente via /audit-ux.
+  #
+  # ux-audit:
+  #   runs-on: ubuntu-latest
+  #   if: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Rodar ux-guardian nos .vue alterados
+  #       env:
+  #         ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+  #       run: |
+  #         echo "Invocar o agente ux-guardian (.github/agents/ux-guardian.agent.md)"
+  #         echo "sobre os arquivos .vue do diff. Requer ferramenta de execução de agente."

@@ -1,0 +1,30 @@
+{
+  "name": "@dock-tech/shared-copilot-front-lib-internal-eslint-plugin",
+  "version": "2.2.0",
+  "description": "Entry point interno do ESLint plugin distribuído via @dock-tech/shared-copilot-front-lib/eslint-plugin",
+  "author": {
+    "name": "Brayhon Carvalho",
+    "email": "brayhon.carvalho@dock.tech"
+  },
+  "maintainers": [
+    {
+      "name": "Brayhon Carvalho",
+      "email": "brayhon.carvalho@dock.tech"
+    }
+  ],
+  "private": true,
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "keywords": ["eslint", "eslintplugin", "design-system"],
+  "peerDependencies": {
+    "eslint": ">=8.0.0"
+  },
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dock-tech/shared-copilot-front-lib.git",
+    "directory": "eslint-plugin-dock-ds"
+  }
+}
