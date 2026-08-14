@@ -556,9 +556,6 @@ function exportCsv() {
               <aside v-if="selectedRow" class="hv2__side-panel" aria-label="Detalle del pago">
                 <div class="hv2__sp-header">
                   <h3 class="hv2__sp-title">Detalle del pago</h3>
-                  <button class="hv2__sp-close" type="button" aria-label="Cerrar panel" @click="selectedRow = null">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                  </button>
                 </div>
 
                 <!-- Quick summary body -->
@@ -720,9 +717,7 @@ function exportCsv() {
                 <h4 id="hv2-detail-title" class="hv2-detail__title">{{ selectedRow.storeName || selectedRow.tienda }}</h4>
                 <span class="hv2-detail__pdv">ID PDV: {{ selectedRow.storePdvId || '—' }}</span>
               </div>
-              <button class="hv2__sp-close" type="button" aria-label="Cerrar" @click="showDetail = false">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              </button>
+
             </div>
             <!-- Scrollable body -->
             <div class="hv2-detail__body">
@@ -792,9 +787,6 @@ function exportCsv() {
             <!-- Header -->
             <div class="hv2-integration__header">
               <h3 id="hv2-integrations-title" class="hv2-integration__title">Integraciones</h3>
-              <button class="hv2__sp-close" type="button" aria-label="Cerrar" @click="showIntegrations = false">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              </button>
             </div>
             <!-- Info summary -->
             <div class="hv2-integration__info">
@@ -851,9 +843,6 @@ function exportCsv() {
           <div class="hv2-route__card">
             <div class="hv2-route__header">
               <h3 id="hv2-route-title" class="hv2-route__title">{{ selectedRoute.ruta }}</h3>
-              <button class="hv2__sp-close" type="button" aria-label="Cerrar" @click="selectedRoute = null">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              </button>
             </div>
             <div class="hv2-route__body">
               <p class="hv2-route__section-label">Solicitud</p>

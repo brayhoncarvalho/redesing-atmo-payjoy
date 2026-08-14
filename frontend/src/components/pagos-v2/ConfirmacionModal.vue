@@ -23,7 +23,7 @@ const STORE_ID   = '21050015'
 const clienteNome = computed(() => {
   const { primerNombre, segundoNombre, primerApellido, segundoApellido } = formInicial
   const partes = [primerNombre, segundoNombre, primerApellido, segundoApellido].filter(Boolean)
-  return partes.length ? partes.join(' ') : '—'
+  return partes.join(' ')
 })
 
 const referenciaPago = computed(() =>
@@ -58,13 +58,6 @@ function formatMonto(value: number) {
         @click.self="cerrarModal"
       >
         <div class="m-card">
-
-          <!-- Fechar -->
-          <button class="m-close" type="button" aria-label="Cerrar" @click="cerrarModal">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-          </button>
 
           <!-- Cabeçalho -->
           <div class="m-header">
@@ -110,7 +103,7 @@ function formatMonto(value: number) {
               </span>
             </div>
 
-            <div class="m-table__row">
+            <div v-if="clienteNome" class="m-table__row">
               <span class="m-table__label">Cliente</span>
               <span class="m-table__value">{{ clienteNome }}</span>
             </div>
@@ -283,10 +276,10 @@ function formatMonto(value: number) {
   font-size: 13px;
 }
 
-.m-meta__label { color: var(--color-text-secondary); }
+.m-meta__label { color: var(--color-text-primary); font-weight: 600; }
 
 .m-meta__value {
-  font-weight: 600;
+  font-weight: 400;
   color: var(--color-gray-900);
 }
 
@@ -376,11 +369,11 @@ function formatMonto(value: number) {
   gap: 12px;
 }
 
-.m-card-detail__label { color: var(--color-text-secondary); }
+.m-card-detail__label { color: var(--color-text-primary); font-weight: 600; }
 
 .m-card-detail__value {
   color: var(--color-gray-900);
-  font-weight: 500;
+  font-weight: 400;
   text-align: right;
 }
 

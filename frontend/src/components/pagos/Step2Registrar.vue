@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { usePagosPayjoy } from '@/composables/usePagosPayjoy'
 
 const {
@@ -13,9 +13,15 @@ const {
   opcionSeleccionada,
   seleccionarOpcion,
   aceptarPago,
-  volverStep,
   cancelar,
 } = usePagosPayjoy()
+
+const showCancelDialog = ref(false)
+
+function confirmarCancelamento() {
+  showCancelDialog.value = false
+  cancelar()
+}
 
 const clienteNombre = computed(() => {
   const p = formInicial
@@ -108,12 +114,37 @@ function formatMonto(value: number) {
         </fieldset>
       </div>
       <div class="step-card__footer">
-        <button class="btn btn--ghost" type="button" @click="volverStep">Volver</button>
+        <button class="btn btn--ghost" type="button" @click="showCancelDialog = true">Cancelar</button>
         <button class="btn btn--primary" type="button" :disabled="!opcionSeleccionada" @click="aceptarPago">Aceptar</button>
       </div>
     </section>
     </div>
   </template>
+
+  <!-- Dialog de confirmação de cancelamento -->
+  <Teleport to="body">
+    <div v-if="showCancelDialog" class="cancel-overlay" role="dialog" aria-modal="true" aria-labelledby="cancel-title" @click.self="showCancelDialog = false">
+      <div class="cancel-dialog">
+        <div class="cancel-dialog__body">
+          <span class="cancel-dialog__icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#dc2626" stroke-width="1.5"/>
+              <path d="M15 9l-6 6M9 9l6 6" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <div>
+            <h4 id="cancel-title" class="cancel-dialog__title">Cancelar pago</h4>
+            <p class="cancel-dialog__text">¿Está seguro de que desea cancelar este pago?</p>
+            <p class="cancel-dialog__warn">Esta acción no puede deshacerse.</p>
+          </div>
+        </div>
+        <div class="cancel-dialog__actions">
+          <button class="btn btn--ghost" type="button" @click="showCancelDialog = false">Cancelar</button>
+          <button class="btn btn--danger" type="button" @click="confirmarCancelamento">Sí, cancelar</button>
+        </div>
+      </div>
+    </div>
+  </Teleport>
 </template>
 
 <style scoped>
@@ -308,6 +339,24 @@ function formatMonto(value: number) {
   border: 1px solid var(--color-border);
 }
 .btn--ghost:hover { background: var(--color-gray-50); }
+
+.cancel-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+}
+.cancel-dialog {
+  background: #fff; border-radius: 12px; width: 420px; max-width: 90vw;
+  padding: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+.cancel-dialog__body { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+.cancel-dialog__icon { flex-shrink: 0; margin-top: 2px; }
+.cancel-dialog__title { font-size: 15px; font-weight: 600; color: var(--color-gray-900, #111827); margin: 0 0 6px; }
+.cancel-dialog__text { font-size: 14px; color: var(--color-gray-700, #374151); margin: 0 0 4px; }
+.cancel-dialog__warn { font-size: 13px; color: #dc2626; margin: 0; }
+.cancel-dialog__actions { display: flex; justify-content: flex-end; gap: 10px; }
+.btn--danger { background: #dc2626; color: #fff; border: none; }
+.btn--danger:hover { background: #b91c1c; }
 
 .sr-only {
   position: absolute;

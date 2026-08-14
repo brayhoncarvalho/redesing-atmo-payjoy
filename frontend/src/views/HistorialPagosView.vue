@@ -442,11 +442,6 @@ onUnmounted(() => window.removeEventListener('keydown', handleEscape))
           <!-- Linha 3 (expandível): Paso en flujo · Tienda · Usuario -->
           <Transition name="more-filters">
             <div v-if="showMoreFilters" class="filters-grid filters-grid--advanced">
-              <div class="field">
-                <label class="field__label" for="filter-num-auto">Número de autorización</label>
-                <input id="filter-num-auto" v-model="filters.numeroAutorizacion" class="field__input" type="text" placeholder="Ingrese el número" autocomplete="off" />
-              </div>
-
               <!-- Paso en flujo multiselect -->
               <div class="field">
                 <label class="field__label">Paso en flujo</label>
@@ -653,16 +648,6 @@ onUnmounted(() => window.removeEventListener('keydown', handleEscape))
             <!-- Header -->
             <div class="detail-modal__header">
               <h3 id="detail-modal-title" class="detail-modal__title">{{ HISTORIAL_PAGOS_TEXT.detailModalTitle }}</h3>
-              <button
-                class="detail-modal__close"
-                type="button"
-                :aria-label="HISTORIAL_PAGOS_TEXT.detailModalClose"
-                @click="closeDetailModal"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </button>
             </div>
 
             <div v-if="detailRecord" class="detail-modal__body">
@@ -717,8 +702,11 @@ onUnmounted(() => window.removeEventListener('keydown', handleEscape))
                 </div>
 
                 <div class="dm-footer dm-footer--center">
-                  <button class="btn btn--danger" type="button" @click="handleRequestCancel">
+                  <button v-if="detailRecord.tipoPago === 'Pago Total'" class="btn btn--danger" type="button" @click="handleRequestCancel">
                     {{ HISTORIAL_PAGOS_TEXT.cancelPayment }}
+                  </button>
+                  <button v-else class="btn btn--outline" type="button" @click="closeDetailModal">
+                    Cerrar
                   </button>
                 </div>
               </template>
@@ -962,9 +950,6 @@ onUnmounted(() => window.removeEventListener('keydown', handleEscape))
           <div class="hv2-route__card">
             <div class="hv2-route__header">
               <h3 class="hv2-route__title">{{ selectedRoute.ruta }}</h3>
-              <button class="hv2__sp-close" type="button" aria-label="Cerrar" @click="selectedRoute = null">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              </button>
             </div>
             <div class="hv2-route__body">
               <p class="hv2-route__section-label">Solicitud</p>
@@ -1148,7 +1133,7 @@ onUnmounted(() => window.removeEventListener('keydown', handleEscape))
 .btn-more-filters:hover { text-decoration: underline; }
 
 .filters-grid--row2 { grid-template-columns: 1fr 2fr; }
-.filters-grid--advanced { grid-template-columns: 1fr 1fr 1fr 1fr; }
+.filters-grid--advanced { grid-template-columns: 1fr 1fr 1fr; }
 
 /* Buscar combo */
 .field--buscar .buscar-combo {
