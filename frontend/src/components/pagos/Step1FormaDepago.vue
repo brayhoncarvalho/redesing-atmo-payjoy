@@ -16,11 +16,6 @@ const {
   currentStep,
 } = usePagosPayjoy()
 
-const tipoCobroOptions = [
-  { value: 'financiamiento', label: 'Pago del financiamiento' },
-  { value: 'otro', label: 'Otro cobro' },
-]
-
 const buscarPorOptions = [
   { value: 'DN', label: 'DN' },
   { value: 'DeviceTag', label: 'DeviceTag' },
@@ -44,7 +39,6 @@ const { value: primerApellidoValue, handleBlur: blurApellido } = useField<string
 const { value: segundoApellidoValue                         } = useField<string>('segundoApellido')
 
 // ── Campos: Pago Parcial ──────────────────────────────────────────────────────
-const { value: tipoCobroValue    } = useField<string>('tipoCobro')
 const { value: buscarPorValue    } = useField<string>('buscarPor')
 const { value: valorBusquedaValue } = useField<string>('valorBusqueda')
 
@@ -54,7 +48,6 @@ watch(primerNombreValue,   v => { formInicial.primerNombre     = v ?? '' })
 watch(segundoNombreValue,  v => { formInicial.segundoNombre    = v ?? '' })
 watch(primerApellidoValue, v => { formInicial.primerApellido   = v ?? '' })
 watch(segundoApellidoValue,v => { formInicial.segundoApellido  = v ?? '' })
-watch(tipoCobroValue,      v => { formParcial.tipoCobro        = v ?? '' })
 watch(buscarPorValue,      v => { formParcial.buscarPor        = v ?? '' })
 watch(valorBusquedaValue,  v => { formParcial.valorBusqueda    = v ?? '' })
 
@@ -66,7 +59,6 @@ function onVoucherInput(e: Event) {
 const voucherError    = computed(() => errors.value.voucher       ?? '')
 const nombreError     = computed(() => errors.value.primerNombre  ?? '')
 const apellidoError   = computed(() => errors.value.primerApellido ?? '')
-const tipoCobroError  = computed(() => errors.value.tipoCobro     ?? '')
 const buscarPorError  = computed(() => errors.value.buscarPor     ?? '')
 const valorError      = computed(() => errors.value.valorBusqueda ?? '')
 
@@ -194,36 +186,7 @@ const buscarDisabled = computed(() => isLoadingBuscar.value)
 
     <!-- Formulário: Pago Parcial -->
     <template v-else>
-      <div class="form-grid form-grid--3">
-        <div class="form-field">
-          <label class="form-field__label" for="tipo-cobro">
-            Tipo de cobro <span class="form-field__required" aria-hidden="true">*</span>
-          </label>
-          <div class="form-field__select-wrap">
-            <select
-              id="tipo-cobro"
-              v-model="tipoCobroValue"
-              class="form-field__select"
-              :class="{ 'form-field__select--error': tipoCobroError }"
-              :aria-invalid="!!tipoCobroError"
-              required
-            >
-              <option value="" disabled>Seleccione una opción</option>
-              <option
-                v-for="opt in tipoCobroOptions"
-                :key="opt.value"
-                :value="opt.value"
-              >{{ opt.label }}</option>
-            </select>
-            <span class="form-field__select-arrow" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M4 6l4 4 4-4" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </div>
-          <p v-if="tipoCobroError" class="form-field__error" role="alert">{{ tipoCobroError }}</p>
-        </div>
-
+      <div class="form-grid form-grid--2">
         <div class="form-field">
           <label class="form-field__label" for="buscar-por">
             Buscar por <span class="form-field__required" aria-hidden="true">*</span>

@@ -8,7 +8,6 @@
       />
     </div>
     <div class="topbar__user">
-      <span class="topbar__store">CAC TAPACHULA &middot; PDV 21050015</span>
       <div class="topbar__profile">
         <div class="topbar__avatar" aria-hidden="true">CG</div>
         <span class="topbar__username">camila.graciano</span>

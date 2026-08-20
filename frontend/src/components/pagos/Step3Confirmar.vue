@@ -410,7 +410,7 @@ function handleGuardar() {
         @click="handleGuardar"
       >
         <template v-if="isLoadingGuardar">Procesando...</template>
-        <template v-else>{{ formaPagoFinal === 'efectivo' ? 'Registrar Pago' : 'Guardar' }}</template>
+        <template v-else>{{ formaPagoFinal === 'efectivo' ? 'Registrar Pago' : 'Confirmar' }}</template>
       </button>
     </div>
 

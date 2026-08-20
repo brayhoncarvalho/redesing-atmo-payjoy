@@ -15,7 +15,6 @@ export const schemaStep1Inicial = yup.object({
 
 // ── Pago Parcial ──────────────────────────────────────────────
 export const schemaStep1Parcial = yup.object({
-  tipoCobro: yup.string().required('Este campo es obligatorio.'),
   buscarPor: yup.string().required('Este campo es obligatorio.'),
   valorBusqueda: yup.string().required('Este campo es obligatorio.').trim(),
 })

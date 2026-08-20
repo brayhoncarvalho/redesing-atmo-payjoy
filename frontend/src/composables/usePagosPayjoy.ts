@@ -61,7 +61,7 @@ const formInicial = reactive<FormaPagoStep1Inicial>({
 })
 
 const formParcial = reactive<FormaPagoStep1Parcial>({
-  tipoCobro: '',
+  tipoCobro: 'financiamiento',
   buscarPor: '',
   valorBusqueda: '',
 })
@@ -235,7 +235,7 @@ function resetFluxo() {
   currentStep.value = 1
   tipoPago.value = 'inicial'
   Object.assign(formInicial, { voucher: '', primerNombre: '', segundoNombre: '', primerApellido: '', segundoApellido: '' })
-  Object.assign(formParcial, { tipoCobro: '', buscarPor: '', valorBusqueda: '' })
+  Object.assign(formParcial, { tipoCobro: 'financiamiento', buscarPor: '', valorBusqueda: '' })
   ventaId.value = ''
   ventaDescripcion.value = ''
   ventaTotal.value = 0
